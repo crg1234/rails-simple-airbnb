@@ -1,0 +1,46 @@
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-12">
+      <h1>All our Flats</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+        <p>All <%= @flats.count %> flats.</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <% @flats.each do |flat| %>
+      <div class="col-md-4 py-3">
+        <div class="flat-card card p-3 h-auto">
+          <%# <div class="flat-card-image" style="background-image: url('https://images.unsplash.com/photo-1494526585095-c41746248156?w=1200')"></div> %>
+          <div class="flat-card-content">
+            <div class="flat-card-title">
+              <h4><%= flat.name %></h4>
+            </div>
+            <p><%= flat.address %></p>
+            <div class="d-flex">
+              <div class="flex align-items-center">
+                <i class="fa-solid fa-people-line"></i>
+                <span><%= flat.number_of_guests %></span>
+              </div>
+              <div class="flex align-items-center ms-3">
+                <i class="fa-solid fa-euro-sign"></i>
+                <span><%= flat.price_per_night %></span>
+              </div>
+            </div>
+          </div>
+          <div class="flat-card-actions">
+            <a href="/flats/<%= flat.id %>">More info</a>
+            <a class="ms-3 text-warning" href="/flats/<%= flat.id %>/edit">Edit</a>
+            <a data-turbo-method="delete" data-turbo-confirm="Are you sure?" class="ms-3 text-danger" href="/flats/<%= flat.id %>">Remove</a>
+          </div>
+        <%# </div> %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+</div>

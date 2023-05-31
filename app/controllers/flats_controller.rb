@@ -1,7 +1,5 @@
 class FlatsController < ApplicationController
-before_action :set_flat, only: [:show, :edit, :update, :destroy]
-
-end
+  before_action :set_flat, only: [:show, :edit, :update, :destroy]
 
   def index
     @flats = Flat.all
@@ -16,7 +14,7 @@ end
   end
 
   def create
-    @flat = Flat.new(params)
+    @flat = Flat.new(flat_params)
     if @flat.save
       redirect_to flat_path(@flat)
     else
@@ -30,7 +28,7 @@ end
 
   def update
     # @flat = Flat.find_by(id: params[:id])
-    if @flat.update(params)
+    if @flat.update(flat_params)
       redirect_to flat_path(@flat)
     else
       render :edit, status: :unprocessable_entity
@@ -45,12 +43,11 @@ end
 
   private
 
-  def params
+  def flat_params
     params.require(:flat).permit(:name, :address, :description, :price_per_night, :number_of_guests)
   end
 
   def set_flat
     @flat = Flat.find(params[:id])
   end
-
 end
